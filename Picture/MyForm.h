@@ -1,8 +1,7 @@
 #pragma once
-#include <iostream>
 //массив координат точки
-char arr[30050][3000]; 
-
+int arr_X[10000]; 
+int arr_Y[10000];
 
 namespace Picture {
 
@@ -135,7 +134,7 @@ namespace Picture {
 			// 
 			// timer2
 			// 
-			this->timer2->Interval = 250;
+			this->timer2->Interval = 10;
 			this->timer2->Tick += gcnew System::EventHandler(this, &MyForm::Move_Load);
 			// 
 			// MyForm
@@ -159,13 +158,12 @@ namespace Picture {
 
 		}
 #pragma endregion
-		unsigned short k,i,j;
+		unsigned short k,i;
 		bool Drow;
 		Point p;
 		Graphics ^ MyGraphics;		//Объект Graphics для рисования
 		Pen ^ MyPen;				//Перо для рисования
 		Bitmap^ bitmap;
-		int x; int y;
 
 //================Инициализация_переменных=========================================
 		private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -174,46 +172,22 @@ namespace Picture {
 			bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 			pictureBox1->Image = bitmap;
 			MyGraphics = Graphics::FromImage(bitmap);
-//			x = 0; y = 0;
-			//проблеммма с циклом
-			for(x=0; x<300; x++) {
-				for(y=0; y<300; y++) {
-					k++;
-					arr[x][y] = '0';
-				}
-			}
-			std::cout << k;
-//			x = 0; y = 0;
 		}
 //================Перерисовка окна и вывод кол-ва элементов массива==================
 		private: System::Void MyForm1_Load(System::Object^  sender, System::EventArgs^  e) {
 			pictureBox1->Image = bitmap;
-			label1->Text = p.ToString();
+			label1->Text = k.ToString();
 			if (k >= 9900) k=0;
 		}
 //================Перемещение точки===================================================
 		private: System::Void Move_Load(System::Object^  sender, System::EventArgs^  e){
-			timer2->Stop();
-			for(x=0; x<300; x++)
-				for(y=0; y<300; y++) {
-//					std::cout <<"X="<< x << "\tY= " << y <<std::endl;
-					if(arr[x][y]=='1') {
-						pictureBox2->Location = Point(x+12, y+12);
-						pictureBox1->Update();
-						pictureBox2->Update();
-						timer2->Interval = 1000;
-						timer2->Start();
-//						timer2->Enabled = true;
-						break;
-					}
-					if (x == 299 && y == 299) 
-						timer2->Enabled = false;
-				}
+			pictureBox2->Location = System::Drawing::Point(arr_X[i], arr_Y[i]);
+			if (i!=k) i++;
+			else i=0;
 		}
 //================START================================================================
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			x = 0;
-			y = 0;
+			i=0;
 			timer2->Enabled = true;
 			pictureBox2->Visible = true;
 		}
@@ -223,24 +197,17 @@ namespace Picture {
 			MyGraphics->Clear(Color::White);
 			pictureBox2->Visible = false;
 			k=0;
-			system("cls");
-			for(x=0; x<300; x++)
-				for(y=0; y<300; y++)
-					arr[x][y] = '0';
 		}
 //=====================================================================================
 		private: System::Void pictureBox1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 			if (Drow == true) {
-
 				if (p.X != e->X || p.Y != e->Y) {
 					MyGraphics->DrawLine(MyPen, p.X, p.Y, e->X, e->Y);
-					p.X = e->X; p.Y = e->Y;
-
-					if(p.X>=0 && p.X<300 && p.Y>=0 && p.Y<300)
-						arr[p.X][p.Y] = '1';
+					arr_X[k] = p.X+12;
+					arr_Y[k] = p.Y+12;
 					k++;
+					p.X = e->X; p.Y = e->Y;
 				}
-				 
 			}
 		}
 //=====================================================================================
