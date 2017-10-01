@@ -1,7 +1,7 @@
 #pragma once
 //массив координат точки
-int arr_X[10000]; 
-int arr_Y[10000];
+int short arr_X[10000]; 
+int short arr_Y[10000];
 
 namespace Picture {
 
