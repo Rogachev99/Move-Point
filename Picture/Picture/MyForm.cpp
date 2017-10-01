@@ -4,10 +4,10 @@ using namespace System::Windows::Forms;
  
 [STAThread]
 int main(array<String^>^ arg) {
-    Application::EnableVisualStyles();
-    Application::SetCompatibleTextRenderingDefault(false);
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
  
-	Picture::MyForm form; //Picture - имя вашего проекта
-    Application::Run(%form);
+	Picture::MyForm form; //Picture - ГЁГ¬Гї ГўГ ГёГҐГЈГ® ГЇГ°Г®ГҐГЄГІГ 
+	Application::Run(%form);
 	return 0;
 }
