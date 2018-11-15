@@ -1,13 +1,11 @@
 #pragma once
-//массив координат точки
-int arr_X[10000]; 
-int arr_Y[10000];
 
 namespace Picture {
 
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
@@ -164,6 +162,7 @@ namespace Picture {
 		Graphics ^ MyGraphics;		//Объект Graphics для рисования
 		Pen ^ MyPen;				//Перо для рисования
 		Bitmap^ bitmap;
+		List<Point> ^ list;
 
 //================Инициализация_переменных=========================================
 		private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -172,30 +171,31 @@ namespace Picture {
 			bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 			pictureBox1->Image = bitmap;
 			MyGraphics = Graphics::FromImage(bitmap);
+			list = gcnew List<Point>();
 		}
 //================Перерисовка окна и вывод кол-ва элементов массива==================
 		private: System::Void MyForm1_Load(System::Object^  sender, System::EventArgs^  e) {
 			pictureBox1->Image = bitmap;
 			label1->Text = k.ToString();
-			if (k >= 9900) k=0;
 		}
 //================Перемещение точки===================================================
 		private: System::Void Move_Load(System::Object^  sender, System::EventArgs^  e){
-			pictureBox2->Location = System::Drawing::Point(arr_X[i], arr_Y[i]);
+			pictureBox2->Location = System::Drawing::Point(list[i]);
 			if (i!=k) i++;
 			else i=0;
 		}
-//================START================================================================
+//=====================================================================================
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			i=0;
 			timer2->Enabled = true;
 			pictureBox2->Visible = true;
 		}
-//================STOP=================================================================
+//=====================================================================================
 		private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			timer2->Enabled = false;
 			MyGraphics->Clear(Color::White);
 			pictureBox2->Visible = false;
+			list->Clear();
 			k=0;
 		}
 //=====================================================================================
@@ -203,9 +203,8 @@ namespace Picture {
 			if (Drow == true) {
 				if (p.X != e->X || p.Y != e->Y) {
 					MyGraphics->DrawLine(MyPen, p.X, p.Y, e->X, e->Y);
-					arr_X[k] = p.X+12;
-					arr_Y[k] = p.Y+12;
-					k++;
+					list->Add(Point(p.X + 12, p.Y + 12));
+					k = list->Count - 1;
 					p.X = e->X; p.Y = e->Y;
 				}
 			}
@@ -218,7 +217,7 @@ namespace Picture {
 //=====================================================================================
 		private: System::Void pictureBox1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 			Drow = false;
-			p.X = e->X; p.Y = e->Y;			//!!!!хз для чего оно здесь
+			p.X = e->X; p.Y = e->Y;			//???
 		}
 //=====================================================================================
 	};
