@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 namespace Picture {
 
@@ -10,7 +10,7 @@ namespace Picture {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	/// <summary>
-	/// Сводка для MyForm
+	/// РЎРІРѕРґРєР° РґР»СЏ MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -20,13 +20,13 @@ namespace Picture {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// РћСЃРІРѕР±РѕРґРёС‚СЊ РІСЃРµ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЂРµСЃСѓСЂСЃС‹.
 		/// </summary>
 		~MyForm()
 		{
@@ -48,14 +48,14 @@ namespace Picture {
 
 	private:
 		/// <summary>
-		/// Требуется переменная конструктора.
+		/// РўСЂРµР±СѓРµС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.
 		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Обязательный метод для поддержки конструктора - не изменяйте
-		/// содержимое данного метода при помощи редактора кода.
+		/// РћР±СЏР·Р°С‚РµР»СЊРЅС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° - РЅРµ РёР·РјРµРЅСЏР№С‚Рµ
+		/// СЃРѕРґРµСЂР¶РёРјРѕРµ РґР°РЅРЅРѕРіРѕ РјРµС‚РѕРґР° РїСЂРё РїРѕРјРѕС‰Рё СЂРµРґР°РєС‚РѕСЂР° РєРѕРґР°.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -159,12 +159,12 @@ namespace Picture {
 		unsigned short k,i;
 		bool Drow;
 		Point p;
-		Graphics ^ MyGraphics;		//Объект Graphics для рисования
-		Pen ^ MyPen;				//Перо для рисования
+		Graphics ^ MyGraphics;		//РћР±СЉРµРєС‚ Graphics РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
+		Pen ^ MyPen;				//РџРµСЂРѕ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 		Bitmap^ bitmap;
 		List<Point> ^ list;
 
-//================Инициализация_переменных=========================================
+//================РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ_РїРµСЂРµРјРµРЅРЅС‹С…=========================================
 		private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 			k = 0;
 			MyPen = gcnew Pen(Color::Red,1);
@@ -173,12 +173,12 @@ namespace Picture {
 			MyGraphics = Graphics::FromImage(bitmap);
 			list = gcnew List<Point>();
 		}
-//================Перерисовка окна и вывод кол-ва элементов массива==================
+//================РџРµСЂРµСЂРёСЃРѕРІРєР° РѕРєРЅР° Рё РІС‹РІРѕРґ РєРѕР»-РІР° СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°==================
 		private: System::Void MyForm1_Load(System::Object^  sender, System::EventArgs^  e) {
 			pictureBox1->Image = bitmap;
 			label1->Text = k.ToString();
 		}
-//================Перемещение точки===================================================
+//================РџРµСЂРµРјРµС‰РµРЅРёРµ С‚РѕС‡РєРё===================================================
 		private: System::Void Move_Load(System::Object^  sender, System::EventArgs^  e){
 			pictureBox2->Location = System::Drawing::Point(list[i]);
 			if (i!=k) i++;
